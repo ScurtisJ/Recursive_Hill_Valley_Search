@@ -1,0 +1,25 @@
+# In my implementation, PV(ArrayList<MyObj> arr, int s, int t) is a recursive
+# divide-and-conquer function that returns the index of a peak or valley in the
+# sequence, assuming the array is one of the four shapes described in the
+# handout (strictly increasing, strictly decreasing, up-then-down, or
+# down-then-up).
+
+# The function first handles base cases. If s >= t, there is only one element in
+# the current range, so I return s. I also handle the two-element case
+# (t == s + 1) directly: in “peak mode” I return the index of the larger of the
+# two MyObj values, and in “valley mode” I return the index of the smaller.
+# At the very top level (s == 0 and t == arr.size() - 1), I add a shortcut for
+# the strictly decreasing case: if the sequence starts down and also ends down,
+# I immediately return index 0, which is the peak for that shape.
+
+
+# To decide whether I’m in peak mode or valley mode, I check whether the array
+# starts by going down (arr[0] > arr[1]). If it starts up, I search for a peak;
+# if it starts down, I search for a valley. For longer ranges I compute
+# m = (s + t) / 2 and compare arr[m] and arr[m+1]. In peak mode, a rising slope
+# at m means the peak is to the right; a falling slope means it is to the left.
+# In valley mode, I use the opposite rule. Recursion keeps shrinking [s, t]
+# until a base case is reached, guaranteeing a valid peak or valley index.
+
+
+
